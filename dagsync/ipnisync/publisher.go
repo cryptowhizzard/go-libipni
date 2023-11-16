@@ -231,6 +231,9 @@ func (p *Publisher) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "cid not found", http.StatusNotFound)
 			return
 		}
+
+		// We need to visit this. Unable to load data might be better to send http error not found.
+		
 		http.Error(w, "unable to load data for cid", http.StatusInternalServerError)
 		log.Errorw("Failed to load requested block", "err", err, "cid", c)
 		return
